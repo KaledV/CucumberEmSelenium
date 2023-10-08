@@ -1,17 +1,15 @@
 package br.ce.kvferreira.steps;
 
+import static configure.DriverFactory.closeDriver;
+
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.LoginPage;
-
-import static configure.DriverFactory.closeDriver;
 
 public class RealizarLoginsSteps {
 	
@@ -29,7 +27,7 @@ public class RealizarLoginsSteps {
 
 	
 	
-	@When("informo o Username correto")
+	@When("informo um Username existente")
 	public void informo_o_username_correto() {
 	  page.writeUsername("standard_user");
 	}
@@ -59,7 +57,7 @@ public class RealizarLoginsSteps {
     }
 
     
-    @When("informo o Usarname correto")
+    @When("informo um Usarname existente")
     public void informo_o_usarname_correto() {
     	 page.writeUsername("standard_user");
     }
@@ -73,7 +71,20 @@ public class RealizarLoginsSteps {
     public void verifico_que_é_apresentado_uma_mensagem_de_erro_informando_que_o_campo_de_senha_é_obrigatório() {
     	Assert.assertEquals("Epic sadface: Password is required", page.assertTextError());       
     }
+    
+    @When("informo uma senha")
+    public void informo_uma_senha() {
+    	 page.writePassword("secret_sauce");
+    }
 
+    @When("deixo o campo de nome de usuário em branco")
+    public void deixo_o_campo_de_nome_de_usuário_em_branco() {
+    	 page.writeUsername("");
+    }
 
+    @Then("verifico que é apresentado uma mensagem de erro informando que o campo de nome de usuário é obrigatório")
+    public void verifico_que_é_apresentado_uma_mensagem_de_erro_informando_que_o_campo_de_nome_de_usuário_é_obrigatório() {
+    	Assert.assertEquals("Epic sadface: Username is required", page.assertTextError()); 
+    }
 
 }

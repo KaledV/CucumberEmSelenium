@@ -5,7 +5,7 @@ Feature: Como usuário cadastro do SauceDemo
 
   Scenario: Realizar login com sucesso
     Given que estou acessando a aplicação
-    When informo o Username correto
+    When informo um Username existente
     And a senha correta
     And clico no botão de login
     Then verifico que o login é realizado com sucesso
@@ -17,11 +17,17 @@ Feature: Como usuário cadastro do SauceDemo
   And clico no botão de login
   Then verifico que é apresentado uma mensagem de erro informando que um dos dados está incorreto
   
- Scenario: Erro ao deixar campo em branco
+ Scenario: Erro ao deixar campo de senha em branco
   Given que estou acessando a aplicação
-  When informo o Usarname correto
+  When informo um Usarname existente
   And deixo o campo de senha em branco
   And clico no botão de login
   Then verifico que é apresentado uma mensagem de erro informando que o campo de senha é obrigatório
   
+ Scenario: Erro ao deixar campo de nome de usuário em branco
+  Given que estou acessando a aplicação
+  When informo uma senha
+  And deixo o campo de nome de usuário em branco
+  And clico no botão de login
+  Then verifico que é apresentado uma mensagem de erro informando que o campo de nome de usuário é obrigatório
   
